@@ -40,26 +40,59 @@ Features used include: age, sex, cp, trestbps, chol, fbs, restecg, thalach, exan
 Project Structure
 
 heart-disease-webapp/
+
 │
+
 ├── backend/
-│   ├── app.py               # Flask API
-│   ├── utils.py             # Preprocessing functions
-│   ├── model.pkl            # Pre-trained Random Forest model
-│   ├── scaler.pkl           # Pre-fitted scaler
-│   ├── requirements.txt     # Backend dependencies
+
+│   ├── app.py
+
+# Flask API
+
+│   ├── utils.py
+
+# Preprocessing functions
+
+│   ├── model.pkl 
+
+# Pre-trained Random Forest model
+
+│   ├── scaler.pkl 
+
+# Pre-fitted scaler
+
+│   ├── requirements.txt     # 
+
+Backend dependencies
+
 │
+
 ├── frontend/
-│   ├── public/
+
+│  ├── public/
+
 │   │   └── index.html
+
 │   ├── src/
+
 │   │   ├── App.js
+
 │   │   ├── index.js
+
 │   │   └── components/
+
 │   │       ├── FormInput.js
+
 │   │       └── ResultCard.js
-│   └── package.json         # Frontend dependencies
+
+│   └── package.json         # 
+
+Frontend dependencies
+
 │
+
 ├── README.md
+
 └── .gitignore
 
 
