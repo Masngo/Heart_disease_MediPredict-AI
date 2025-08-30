@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .app-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px; /* Reduced width */
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #5b21b6; /* Purple-700 */
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.5rem 0.75rem; /* Reduced padding */
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db; /* Gray-300 */
+        }
+        .form-input:focus {
+            border-color: #8b5cf6; /* Purple-400 */
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+        }
+        .predict-button {
+            background: linear-gradient(to right, #7c3aed, #3b82f6); /* Purple-500 to Blue-500 */
+            color: #ffffff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .predict-button:hover {
+            background: linear-gradient(to right, #6d28d9, #2563eb); /* Darker shades on hover */
+        }
+        .result-positive {
+            color: #ef4444; /* Red-500 */
+        }
+        .result-negative {
+            color: #22c55e; /* Green-500 */
+        }
+        .loading-spinner {
+            border-top-color: #3b82f6; /* Blue-500 */
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-2">Heart Disease Predictor 🩺</h1>
+        <p class="text-center text-gray-500 mb-8">Enter the patient's data below for a quick analysis.</p>
+
+        <form id="prediction-form" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                <div>
+                    <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                    <input type="number" id="age" name="age" required class="form-input">
+                </div>
+                <div>
+                    <label for="sex" class="block text-sm font-medium text-gray-700">Sex</label>
+                    <select id="sex" name="sex" required class="form-input">
+                        <option value="">Select Sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="cp" class="block text-sm font-medium text-gray-700">Chest Pain Type</label>
+                    <select id="cp" name="cp" required class="form-input">
+                        <option value="">Select Type</option>
+                        <option value="typical_angina">Typical Angina (1)</option>
+                        <option value="atypical_angina">Atypical Angina (2)</option>
+                        <option value="non_anginal">Non-anginal Pain (3)</option>
+                        <option value="asymptomatic">Asymptomatic (4)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="trestbps" class="block text-sm font-medium text-gray-700">Resting Blood Pressure (mm Hg)</label>
+                    <input type="number" id="trestbps" name="trestbps" required class="form-input">
+                </div>
+                <div>
+                    <label for="chol" class="block text-sm font-medium text-gray-700">Serum Cholesterol (mg/dl)</label>
+                    <input type="number" id="chol" name="chol" required class="form-input">
+                </div>
+                <div>
+                    <label for="fbs" class="block text-sm font-medium text-gray-700">Fasting Blood Sugar > 120 mg/dl</label>
+                    <select id="fbs" name="fbs" required class="form-input">
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="restecg" class="block text-sm font-medium text-gray-700">Resting ECG Results</label>
+                    <select id="restecg" name="restecg" required class="form-input">
+                        <option value="">Select Type</option>
+                        <option value="normal">Normal (0)</option>
+                        <option value="st_t_wave_abnormality">ST-T wave abnormality (1)</option>
+                        <option value="left_ventricular_hypertrophy">Left ventricular hypertrophy (2)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="thalach" class="block text-sm font-medium text-gray-700">Max Heart Rate Achieved</label>
+                    <input type="number" id="thalach" name="thalach" required class="form-input">
+                </div>
+                <div>
+                    <label for="exang" class="block text-sm font-medium text-gray-700">Exercise Induced Angina</label>
+                    <select id="exang" name="exang" required class="form-input">
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="oldpeak" class="block text-sm font-medium text-gray-700">ST Depression Induced by Exercise</label>
+                    <input type="number" step="0.1" id="oldpeak" name="oldpeak" required class="form-input">
+                </div>
+                <div>
+                    <label for="slope" class="block text-sm font-medium text-gray-700">Slope of the Peak Exercise ST Segment</label>
+                    <select id="slope" name="slope" required class="form-input">
+                        <option value="">Select</option>
+                        <option value="upsloping">Upsloping (1)</option>
+                        <option value="flat">Flat (2)</option>
+                        <option value="downsloping">Downsloping (3)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="ca" class="block text-sm font-medium text-gray-700">Number of Major Vessels</label>
+                    <input type="number" id="ca" name="ca" min="0" max="3" required class="form-input">
+                </div>
+                <div>
+                    <label for="thal" class="block text-sm font-medium text-gray-700">Thal</label>
+                    <select id="thal" name="thal" required class="form-input">
+                        <option value="">Select</option>
+                        <option value="normal">Normal (3)</option>
+                        <option value="fixed_defect">Fixed Defect (6)</option>
+                        <option value="reversible_defect">Reversible Defect (7)</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="predict-button w-full">Predict</button>
+        </form>
+
+        <div id="prediction-results" class="mt-8 hidden">
+            <div id="loading-spinner" class="flex justify-center items-center">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 loading-spinner"></div>
+            </div>
+            <div id="result-text" class="text-center font-bold text-xl hidden"></div>
+        </div>
+
+        <div id="error-message" class="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg hidden" role="alert">
+            <p>An error occurred. Please check your input and try again.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('prediction-form');
+            const resultsDiv = document.getElementById('prediction-results');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const resultText = document.getElementById('result-text');
+            const errorMessage = document.getElementById('error-message');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                resultsDiv.classList.remove('hidden');
+                loadingSpinner.classList.remove('hidden');
+                resultText.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                try {
+                    const response = await fetch('/predict', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Server error');
+                    }
+
+                    const result = await response.json();
+                    
+                    resultText.textContent = `Prediction: ${result.prediction}`;
+                    resultText.classList.remove('result-positive', 'result-negative');
+
+                    if (result.prediction === 'No Heart Disease') {
+                        resultText.classList.add('result-negative');
+                    } else {
+                        resultText.classList.add('result-positive');
+                    }
+                    
+                    loadingSpinner.classList.add('hidden');
+                    resultText.classList.remove('hidden');
+
+                } catch (error) {
+                    console.error('Fetch Error:', error);
+                    loadingSpinner.classList.add('hidden');
+                    resultsDiv.classList.add('hidden');
+                    errorMessage.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
