@@ -1,233 +1,70 @@
 # Heart_disease_MediPredict-AI
 
-Heart_disease_MediPredict-AI Web Application
+Project Overview
+The Heart Disease MediPredict-AI App is a full-stack web application designed to predict the presence of heart disease. It serves as a practical demonstration of how a machine learning model, initially developed in a data science notebook, can be integrated into a functional, user-friendly web interface.
 
-Overview
+The application allows users to input key patient data through a simple form. This data is then sent to a Python backend, which uses a pre-trained Random Forest Classifier to generate a real-time prediction.
 
-This project is an advanced web-based Heart Disease Prediction Application. It allows users to input health parameters and receive a prediction of heart disease probability using a trained Random Forest Machine Learning model.
+Key Features
+Intuitive Interface: A clean, responsive, single-page web form for data entry.
 
-The application is divided into a backend API (Flask) and a frontend interface (React.js + Tailwind CSS).
+Real-time Prediction: Uses a machine learning model to provide instant results.
 
+Full-Stack Architecture: Combines a modern frontend with a robust Python backend.
 
----
+Scalable: Structured for easy deployment on cloud platforms.
 
-Features
+Tech Stack
+Frontend: HTML, JavaScript, Tailwind CSS
 
-User-friendly web interface for entering patient data.
+Backend: Python, Flask, Gunicorn (for production)
 
-Real-time prediction using Random Forest.
-
-Probability score for prediction confidence.
-
-Clean and modern UI built with Tailwind CSS.
-
-Fully deployable on Heroku/Render (backend) and Vercel/Netlify (frontend).
-
-
-
----
-
-Dataset
-
-Heart Disease UCI Dataset (Kaggle)
-
-Features used include: age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal.
-
-
-
----
+Machine Learning: Scikit-learn, pandas, joblib
 
 Project Structure
+The repository is organized to follow best practices for a Flask application.
 
-heart-disease-webapp/
+Heart_disease_MediPredict-AI/
 
-│
-
-├── backend/
-
-│   ├── app.py
-
-# Flask API
-
-│   ├── utils.py
-
-# Preprocessing functions
-
-│   ├── model.pkl 
-
-# Pre-trained Random Forest model
-
-│   ├── scaler.pkl 
-
-# Pre-fitted scaler
-
-│   ├── requirements.txt     # 
-
-Backend dependencies
-
-│
-
-├── frontend/
-
-│  ├── public/
-
-│   │   └── index.html
-
-│   ├── src/
-
-│   │   ├── App.js
-
-│   │   ├── index.js
-
-│   │   └── components/
-
-│   │       ├── FormInput.js
-
-│   │       └── ResultCard.js
-
-│   └── package.json         # 
-
-Frontend dependencies
-
-│
-
+├── app.py
+├── heart_disease_model.pkl
+├── Procfile
 ├── README.md
+├── requirements.txt
+├── scaler.pkl
+└── templates/
+    └── index.html
 
-└── .gitignore
+Getting Started (Local Development)
+To run this project on your local machine, follow these steps:
 
+Clone the Repository:
 
----
+git clone [https://github.com/Masango/Heart_disease_MediPredict-AI.git](https://github.com/Masango/Heart_disease_MediPredict-AI.git)
+cd Heart_disease_MediPredict-AI
 
-Backend Setup
+Create and Activate a Virtual Environment:
 
-1. Navigate to backend folder:
+python -m venv venv
+# For Windows
+venv\Scripts\activate
+# For macOS/Linux
+source venv/bin/activate
 
-
-
-cd backend
-
-2. Install dependencies:
-
-
+Install Dependencies:
 
 pip install -r requirements.txt
 
-3. Run Flask API:
-
-
+Run the Application:
 
 python app.py
 
-The API will run on http://127.0.0.1:5000/
-
-
-
----
-
-Frontend Setup
-
-1. Navigate to frontend folder:
-
-
-
-cd frontend
-
-2. Install dependencies:
-
-
-
-npm install
-
-3. Start React app:
-
-
-
-npm start
-
-The frontend will run on http://localhost:3000/
-
-Ensure the fetch URL in App.js points to the backend API.
-
-
-
----
+The application will be accessible at http://127.0.0.1:5000 in your web browser.
 
 Deployment
+This project is configured for seamless deployment on platforms like Render. The included Procfile and requirements.txt files ensure that the application can be built and run automatically in a production environment.
 
-Backend: Heroku / Render
+Contact
+For questions or feedback, feel free to connect with me:
 
-Push backend folder to Git repository.
-
-Deploy following Heroku/Render instructions.
-
-
-Frontend: Vercel / Netlify
-
-Push frontend folder to GitHub.
-
-Import project in Vercel/Netlify.
-
-Update backend API URL in React fetch call.
-
-Deploy.
-
-
-
----
-
-Usage
-
-Open the frontend web page.
-
-Fill in all required patient parameters.
-
-Click Predict.
-
-View prediction (Yes/No) and probability.
-
-
-
----
-
-Notes
-
-The app uses a pre-trained Random Forest model and a pre-fitted scaler.
-
-Ensure backend and frontend are properly connected for live predictions.
-
-This project is portfolio-ready for healthcare AI/ML demonstration.
-
-
-
----
-
-Author
-
-Masango Dewheretsoko
-
----
-
-License
-
-MIT License
-
-
-
-I've created a professional README file for your Heart Disease Prediction Web Application. It includes:
-
-Project overview and features
-
-Dataset information
-
-Full folder structure
-
-Backend and frontend setup instructions
-
-Deployment guide
-
-Usage instructions
-
-Author and license info
-
-
-
+LinkedIn Profile: linkedin.com/in/masango-dewheretsoko-5ba182148
