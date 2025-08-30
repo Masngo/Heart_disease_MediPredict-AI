@@ -39,6 +39,7 @@ Heart_disease_MediPredict-AI/
 ├── scaler.pkl
 
 └── templates/
+    
     └── index.html
 
 Getting Started (Local Development)
