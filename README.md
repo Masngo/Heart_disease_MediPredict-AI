@@ -27,12 +27,19 @@ The repository is organized to follow best practices for a Flask application.
 Heart_disease_MediPredict-AI/
 
 ├── app.py
+
 ├── heart_disease_model.pkl
+
 ├── Procfile
+
 ├── README.md
+
 ├── requirements.txt
+
 ├── scaler.pkl
+
 └── templates/
+    
     └── index.html
 
 Getting Started (Local Development)
@@ -67,4 +74,4 @@ This project is configured for seamless deployment on platforms like Render. The
 Contact
 For questions or feedback, feel free to connect with me:
 
-LinkedIn Profile: linkedin.com/in/masango-dewheretsoko-5ba182148
+LinkedIn Profile: [linkedin.com/in/masango-dewheretsoko-5ba182148 ](https://www.linkedin.com/in/masango-dewheretsoko-5ba182148)
